@@ -44,14 +44,10 @@
           <version>3.1.0</version>
         </plugin>
         <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
-        <plugin>
-          <artifactId>maven-resources-plugin</artifactId>
-          <version>3.0.2</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.8.0</version>
-        </plugin>
+<!--        <plugin>-->
+<!--          <artifactId>maven-compiler-plugin</artifactId>-->
+<!--          <version>3.8.0</version>-->
+<!--        </plugin>-->
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>2.22.1</version>
@@ -79,5 +75,48 @@
         </plugin>
       </plugins>
     </pluginManagement>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.11.0</version>
+        <!--<executions>
+          <execution>
+            <id>default-compile</id>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+            <configuration>
+              &lt;!&ndash; recompile everything for target VM except the module-info.java &ndash;&gt;
+              <excludes>
+                <exclude>module-info.java</exclude>
+              </excludes>
+            </configuration>
+          </execution>
+        </executions>-->
+<!--        <configuration>-->
+<!--          <excludes>-->
+<!--            <exclude>module-info.java</exclude>-->
+<!--          </excludes>-->
+<!--        </configuration>-->
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>3.0.0</version>
+        <executions>
+          <execution>
+            <phase>process-classes</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <target>
+            <delete file="src/main/java/module-info.java"/>
+          </target>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 </project>
