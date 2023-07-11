@@ -1,6 +1,7 @@
 package com.baeldung;
 
 import static org.junit.Assert.assertTrue;
+// import com.baeldung.core.App;
 
 import org.junit.Test;
 
