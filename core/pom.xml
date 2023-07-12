@@ -54,6 +54,27 @@
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
           <version>3.0.2</version>
+          <executions>
+               <!-- Runs the maven-jar-plugin goal straight after compile phase. This allows mvn test and mvn compile
+                to work properly because a jar must be created in order for core to be registered as an automatic
+                module. Can be removed when core is turned into a named module. -->
+               <execution>
+                  <id>repositioned-jar</id>
+                  <phase>process-classes</phase>
+                  <goals>
+                     <goal>jar</goal>
+                  </goals>
+               </execution>
+               <!-- Disables default maven-jar-plugin goal by attaching to non-existant phase.
+                  Remove when "reposition-jar" execution is removed -->
+               <execution>
+                  <id>default-jar</id>
+                  <phase>none</phase>
+                  <goals>
+                     <goal>jar</goal>
+                  </goals>
+               </execution>
+          </executions>
         </plugin>
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
